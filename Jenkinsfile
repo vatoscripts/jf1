@@ -9,14 +9,14 @@ pipeline {
       steps {
         
           // Build new image
-          sh "until docker ps; do sleep 3; done && docker build -t kiyange26773/jf1:${env.GIT_COMMIT} ."
+          sh "docker build -t kiyange26773/jf1:${env.GIT_COMMIT} ."
           // Publish new image
           sh "docker login --username $DOCKERHUB_CREDS_USR --password $DOCKERHUB_CREDS_PSW && docker push kiyange26773/jf1:${env.GIT_COMMIT}"
         
       }
     }
     //deploy staging
-    stage('Deploy E2E') {
+    stage('Deploy Staging') {
       environment {
         GIT_CREDS = credentials('GIT')
       }
