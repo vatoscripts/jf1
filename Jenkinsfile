@@ -14,6 +14,7 @@ pipeline {
           sh "docker login --username $DOCKERHUB_CREDS_USR --password $DOCKERHUB_CREDS_PSW && docker push kiyange26773/jf1:${env.GIT_COMMIT}"
         
       }
+    }
 
     stage('Deploy E2E') {
       environment {
@@ -34,4 +35,4 @@ pipeline {
 
     }
   }
-}
+
