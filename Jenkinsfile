@@ -22,7 +22,7 @@ pipeline {
       }
       steps {
         
-          sh "git clone https://$GIT_CREDS_USR:$GIT_CREDS_PSW@github.com/vatoscripts/argocd-demo-deploy.git"
+          sh "git clone https://github.com/vatoscripts/argocd-demo-deploy.git"
           sh "git config --global user.email 'vatoscripts@gmail.com'"
 
           dir("argocd-demo-deploy") {
