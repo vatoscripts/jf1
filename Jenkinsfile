@@ -15,6 +15,23 @@ pipeline {
         
       }
 
+    stage('Deploy E2E') {
+      environment {
+        GIT_CREDS = credentials('git')
+      }
+      steps {
+        container('tools') {
+          sh "git clone https://$GIT_CREDS_USR:$GIT_CREDS_PSW@github.com/vatoscripts/argocd-demo-deploy.git"
+          sh "git config --global user.email 'vatoscripts@gmail.com'"
+
+          dir("argocd-demo-deploy") {
+            sh "cd ./e2e && kustomize edit set image kiyange26773/jf1:${env.GIT_COMMIT}"
+            sh "git commit -am 'Publish new version' && git push || echo 'no changes'"
+          }
+        }
+      }
+    }
+
     }
   }
 }
