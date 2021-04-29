@@ -21,7 +21,7 @@ pipeline {
         GIT_CREDS = credentials('GIT')
       }
       steps {
-        container('tools') {
+        
           sh "git clone https://$GIT_CREDS_USR:$GIT_CREDS_PSW@github.com/vatoscripts/argocd-demo-deploy.git"
           sh "git config --global user.email 'vatoscripts@gmail.com'"
 
@@ -29,7 +29,7 @@ pipeline {
             sh "cd ./e2e && kustomize edit set image kiyange26773/jf1:${env.GIT_COMMIT}"
             sh "git commit -am 'Publish new version' && git push || echo 'no changes'"
           }
-        }
+        
       }
     }
 
