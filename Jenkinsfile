@@ -14,10 +14,7 @@ pipeline {
           sh "docker login --username $DOCKERHUB_CREDS_USR --password $DOCKERHUB_CREDS_PSW && docker push kiyange26773/jf9:${env.GIT_COMMIT}"
         
       }
-      steps {
-       //writing some message
-       sh "Helloooo world..."
-      }
+
     }
   }
 }
