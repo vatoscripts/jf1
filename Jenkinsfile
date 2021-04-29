@@ -15,7 +15,7 @@ pipeline {
         
       }
     }
-
+    //deploy staging
     stage('Deploy E2E') {
       environment {
         GIT_CREDS = credentials('GIT')
@@ -32,6 +32,20 @@ pipeline {
         
       }
     }
+
+    //deploy to PROD
+    stage('Deploy to Prod') {
+      steps {
+        input message:'Promote Production?'
+        
+          dir("argocd-demo-deploy") {
+            sh "cd ./prod && ls"
+            sh "git commit -am 'Publish new version...' && git push || echo 'no changes made'"
+          }
+    
+      }
+    }
+
 
     }
   }
