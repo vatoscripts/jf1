@@ -18,7 +18,7 @@ pipeline {
 
     stage('Deploy E2E') {
       environment {
-        GIT_CREDS = credentials('git')
+        GIT_CREDS = credentials('GIT')
       }
       steps {
         container('tools') {
