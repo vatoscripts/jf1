@@ -26,7 +26,7 @@ pipeline {
           sh "git config --global user.email 'vatoscripts@gmail.com'"
 
           dir("argocd-demo-deploy") {
-            sh "cd ./e2e && ls"
+            sh "cd ./e2e && ls && kustomize edit set image kiyange26773/jf1:${env.GIT_COMMIT}"
             sh "git commit -am 'Publish new version' && git push || echo 'no changes'"
           }
         
@@ -39,7 +39,7 @@ pipeline {
         input message:'Promote Production?'
         
           dir("argocd-demo-deploy") {
-            sh "cd ./prod && ls"
+            sh "cd ./prod && ls && kustomize edit set image kiyange26773/jf1:${env.GIT_COMMIT}"
             sh "git commit -am 'Publish new version...' && git push || echo 'no changes made'"
           }
     
