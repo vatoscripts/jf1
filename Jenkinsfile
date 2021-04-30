@@ -26,8 +26,13 @@ pipeline {
           sh "git config --global user.email 'vatoscripts@gmail.com'"
 
           dir("argocd-demo-deploy") {
+<<<<<<< HEAD
             sh "cd ./e2e && ls && cd /usr/local/bin && ls && kustomize edit set image kiyange26773/jf1:${env.GIT_COMMIT}"
             sh "git commit -am 'Publish new version' && git push || echo 'no changes'"
+=======
+            sh "cd ./e2e && ls && cd /usr/local/bin && kustomize edit set image kiyange26773/jf1:${env.GIT_COMMIT}"
+            sh "git commit -am 'Publish new version' && git push || echo 'no changes..'"
+>>>>>>> bcfae726f57da55fbb28e0d5da02e23a32fb14bb
           }
         
       }
