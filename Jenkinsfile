@@ -1,5 +1,30 @@
 pipeline {
-  agent any
+
+agent any
+
+apiVersion: v1
+kind: Pod
+spec:
+  containers:
+  - name: dind
+    image: docker:dind
+    securityContext:
+      privileged: true
+  - name: docker
+    env:
+    - name: DOCKER_HOST
+      value: 0.0.0.0
+    image: docker:latest
+    command:
+    - cat
+    tty: true
+  - name: tools
+    image: argoproj/argo-cd-ci-builder:v0.13.1
+    command:
+    - cat
+    tty: true
+"""
+
   stages {
 
     stage('Build') {
@@ -26,7 +51,7 @@ pipeline {
           sh "git config --global user.email 'vatoscripts@gmail.com'"
 
           dir("argocd-demo-deploy") {
-            sh "cd ./e2e && ls && cd /usr/local/bin && ls && kubectl kustomize version && kustomize edit set image kiyange26773/jf1:${env.GIT_COMMIT}"
+            sh "cd ./e2e && ls && kustomize edit set image kiyange26773/jf1:${env.GIT_COMMIT}"
             sh "git commit -am 'Publish new version' && git push || echo 'no changes'"
           }
         
@@ -36,10 +61,10 @@ pipeline {
     //deploy to PROD
     stage('Deploy to Prod') {
       steps {
-        input message:'Promote Production?'
+        input message:'Really Deploy?'
         
           dir("argocd-demo-deploy") {
-            sh "cd ./prod && ls "
+            sh "cd ./prod && ls && kustomize edit set image kiyange26773/jf1:${env.GIT_COMMIT}"
             sh "git commit -am 'Publish new version...' && git push || echo 'no changes made...'"
           }
     
