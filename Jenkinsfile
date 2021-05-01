@@ -4,7 +4,7 @@ apiVersion: v1
 kind: Pod
 spec:
   containers:
-  #- name: dind
+  
     image: docker:18.09-dind
     securityContext:
       privileged: true
