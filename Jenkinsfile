@@ -30,7 +30,7 @@ agent any
           dir("argocd-demo-deploy") {
             sh "cd ./e2e && ls && sed 's/musesi/moses/g' names.txt > new_names.txt && git add ."
             //sh "git remote add origin https://github.com/vatoscripts/argocd-demo-deploy.git && git add ."
-            sh "git commit -m 'Publish new version' && git push -u origin master || echo 'no changes'"
+            sh "git commit -m 'Publish new version' && git push || echo 'no changes'"
           }
         
       }
