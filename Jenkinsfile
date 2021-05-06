@@ -28,9 +28,9 @@ agent any
           sh "git config --global user.email 'vatoscripts@gmail.com'"
 
           dir("argocd-demo-deploy") {
-            sh "cd ./e2e && ls && sed 's/musesi/moses/g' names.txt && git log"
+            sh "cd ./e2e && ls && sed 's/musesi/moses/g' names.txt && git add ."
             //sh "git add . && git status && git commit -m 'Publish new version' && git push -u origin master"
-            //sh "git commit -am 'Publish new version' && git push || echo 'no changes'"
+            sh "git commit -m 'Publish new version' && git push || echo 'no changes'"
           }
         
       }
