@@ -26,7 +26,7 @@ agent any
         
           sh "git clone https://github.com/vatoscripts/argocd-demo-deploy.git"
           sh "git config --global user.email 'vatoscripts@gmail.com'"
-          sh "git config --global user.username 'vatoscripts'"
+          sh "git config --global user.name 'vatoscripts'"
          
 
           dir("argocd-demo-deploy") {
