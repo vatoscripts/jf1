@@ -24,8 +24,9 @@ agent any
       }
       steps {
         
-          sh "git clone git@github.com:vatoscripts/argocd-demo-deploy.git"
-          //sh "git config --global user.email 'vatoscripts@gmail.com'"
+          sh "git clone https://github.com/vatoscripts/argocd-demo-deploy.git"
+          sh "git config --global user.email 'vatoscripts@gmail.com'"
+          sh "git config --global user.username 'vatoscripts'"
          
 
           dir("argocd-demo-deploy") {
@@ -34,7 +35,7 @@ agent any
             //sh "git remote set-url origin git@github.com:vatoscripts/argocd-demo-deploy.git"
             sh "git add ."
             sh "git status"
-            sh "git commit -m 'Publish new version' && git push"
+            sh "git commit -m 'publish new version' && git push -u origin master"
           }
         
       }
