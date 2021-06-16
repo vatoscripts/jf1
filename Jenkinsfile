@@ -32,7 +32,7 @@ agent any
           dir("argocd-demo-deploy") {
             sh "cd ./e2e && ls && kustomize edit set image kiyange26773/jf3:${env.GIT_COMMIT}"
             sh "git add ."
-            sh "git commit -m 'publish...'
+            sh "git commit -m 'publish...'"
             sh "git push"
           }
         
