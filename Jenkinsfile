@@ -29,13 +29,13 @@ agent any
           sh "git config --global user.name 'vatoscripts'"
          
 
-          dir("") {
+          //dir("") {
             //sh "cd ./e2e && ls && kustomize edit set image kiyange26773/jf3:${env.GIT_COMMIT}"
             sh "cd ./e2e && ls && sed 's/musesi/moses/g' names.txt > new_names.txt"
             sh "git add ."
             sh "git commit -m 'publish... this for me'"
             sh "git push -u origin master"
-          }
+         // }
         
       }
     }
@@ -45,13 +45,13 @@ agent any
       steps {
         input message:'Really Deploy?'
         
-          dir("") {
+         // dir("") {
             sh "cd ./prod && ls"
             //sh "cd ./prod && ls && kustomize edit set image kiyange26773/jf1:${env.GIT_COMMIT}"
            // sh "git commit -am 'Publish new version...' && git push || echo 'no changes made...'"
             sh "git commit -m 'publish... this for me'"
             sh "git push -u origin master"
-          }
+         // }
     
       }
     }
