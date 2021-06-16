@@ -35,7 +35,7 @@ agent any
             sh "git remote set-url origin git@github.com:vatoscripts/argocd-demo-deploy.git"
             sh "git add ."
             sh "git status"
-            sh "git commit -m 'publish new version' && git push -u origin master"
+            sh "git commit -m 'publish...' && git push"
           }
         
       }
@@ -47,8 +47,9 @@ agent any
         input message:'Really Deploy?'
         
           dir("argocd-demo-deploy") {
-            sh "cd ./prod && ls && kustomize edit set image kiyange26773/jf1:${env.GIT_COMMIT}"
-            sh "git commit -am 'Publish new version...' && git push || echo 'no changes made...'"
+            sh "cd ./prod && ls"
+            //sh "cd ./prod && ls && kustomize edit set image kiyange26773/jf1:${env.GIT_COMMIT}"
+           // sh "git commit -am 'Publish new version...' && git push || echo 'no changes made...'"
           }
     
       }
