@@ -11,9 +11,9 @@ agent any
       steps {
         
           // Build new image
-          sh "docker build -t kiyange26773/jf4:${env.GIT_COMMIT} ."
+          sh "docker build -t kiyange26773/jf6:${env.GIT_COMMIT} ."
           // Publish new image
-          sh "docker login --username $DOCKERHUB_CREDS_USR --password $DOCKERHUB_CREDS_PSW && docker push kiyange26773/jf4:${env.GIT_COMMIT}"
+          sh "docker login --username $DOCKERHUB_CREDS_USR --password $DOCKERHUB_CREDS_PSW && docker push kiyange26773/jf6:${env.GIT_COMMIT}"
         
       }
     }
@@ -30,9 +30,10 @@ agent any
          
 
           dir("argocd-demo-deploy") {
-            sh "cd ./e2e && ls && kustomize edit set image kiyange26773/jf3:${env.GIT_COMMIT}"
+            //sh "cd ./e2e && ls && kustomize edit set image kiyange26773/jf3:${env.GIT_COMMIT}"
+            sh "cd ./e2e && ls && sed 's/musesi/moses/g' names.txt > new_names.txt"
             sh "git add ."
-            sh "git commit -m 'publish...'"
+            sh "git commit -m 'publish... this for me'"
             sh "git push"
           }
         
